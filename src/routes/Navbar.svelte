@@ -31,14 +31,26 @@
 				<li><a href="/profile">Profile</a></li>
 				<li><a href="/messages">Messages</a></li>
 			{:else if accountInfo.loggedIn && accountInfo.accountType == 'recruiter'}
-				<li><a href="/find-employees" title="find employees"><Icon icon="ion:people" {width} {height} {style} /></a></li>
+				<li>
+					<a href="/freelancers" title="find employees"
+						><Icon icon="ion:people" {width} {height} {style} /></a
+					>
+				</li>
 				<li>
 					<a href="/jobs" title="my jobs"
 						><Icon icon="material-symbols:work" {width} {height} {style} /></a
 					>
 				</li>
-				<li><a href="/profile" title="profile"><Icon icon="ix:user-profile-filled" {width} {height} {style} /></a></li>
-				<li><a href="/messages" title="messages"><Icon icon="mynaui:message-solid" {width} {height} {style}/></a></li>
+				<li>
+					<a href="/profile" title="profile"
+						><Icon icon="ix:user-profile-filled" {width} {height} {style} /></a
+					>
+				</li>
+				<li>
+					<a href="/messages" title="messages"
+						><Icon icon="mynaui:message-solid" {width} {height} {style} /></a
+					>
+				</li>
 			{/if}
 		</ul>
 	</nav>
@@ -47,7 +59,6 @@
 <style>
 	.navigation-bar-container {
 		background-color: teal;
-
 	}
 	nav {
 		display: grid;
@@ -68,18 +79,16 @@
 		grid-template-columns: 1fr 1fr 1fr 1fr;
 		padding: 5px;
 		justify-self: end;
-
 	}
 	.right li {
 		border-radius: 5px;
-		padding:5px;
+		padding: 5px;
 	}
 	.right li:hover {
-		background-color: white;	
+		background-color: white;
 	}
 
 	.right li:active {
-		background-color: gray;	
+		background-color: gray;
 	}
-
 </style>

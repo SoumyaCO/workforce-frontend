@@ -1,32 +1,32 @@
 <script lang="ts">
-	import { goto } from '$app/navigation';
-	const handleNavigation = (role: string) => {
-		if (role === 'freelancer') {
-			goto('/freelancers/dashboard');
-		} else if (role === 'recruiter') {
-			goto('/recruiters/dashboard');
+	const handleNavigation = (action: string) => {
+		if (action === 'create-account') {
+			window.location.href = '/CreateFreelancer';
+		} else if (action === 'login') {
+			window.location.href = '/login';
 		}
 	};
 </script>
 
-<div class="home-page">
-	<h1>Welcome to Our Freelancing Platform</h1>
+<div class="freelancer-dashboard">
+	<h1>Freelancer Dashboard</h1>
 	<p class="description">
-		This is for company internal Works , exclusively for company employees from different branches.
+		Welcome to the freelancer portal. Create a new account or log in to your existing account to get
+		started.
 	</p>
 
-	<div class="two_options">
-		<button class="option-button" on:click={() => handleNavigation('freelancer')}>
-			Continue as Freelancer
+	<div class="options">
+		<button class="option-button" on:click={() => handleNavigation('create-account')}>
+			Create Freelancing Account
 		</button>
-		<button class="option-button recruiter" on:click={() => handleNavigation('recruiter')}>
-			Continue as Recruiter
+		<button class="option-button login" on:click={() => handleNavigation('login')}>
+			Login to Existing Account
 		</button>
 	</div>
 </div>
 
 <style>
-	.home-page {
+	.freelancer-dashboard {
 		display: flex;
 		flex-direction: column;
 		align-items: center;
@@ -54,7 +54,7 @@
 		line-height: 1.6;
 	}
 
-	.two_options {
+	.options {
 		display: flex;
 		gap: 1.5rem;
 		flex-wrap: wrap;
@@ -101,12 +101,12 @@
 		transform: translate(-50%, -50%) scale(1);
 	}
 
-	.option-button.recruiter {
-		background: linear-gradient(135deg, #007bff, #0056b3);
+	.option-button.login {
+		background: linear-gradient(135deg, #4caf50, #45a049);
 	}
 
-	.option-button.recruiter:hover {
-		background: linear-gradient(135deg, #0056b3, #007bff);
+	.option-button.login:hover {
+		background: linear-gradient(135deg, #45a049, #4caf50);
 	}
 
 	@media (max-width: 600px) {
