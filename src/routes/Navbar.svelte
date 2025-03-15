@@ -42,7 +42,7 @@
 					>
 				</li>
 				<li>
-					<a href="/profile" title="profile"
+					<a href="/recruiters/2" title="profile"
 						><Icon icon="ix:user-profile-filled" {width} {height} {style} /></a
 					>
 				</li>

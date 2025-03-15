@@ -3,7 +3,7 @@
 	import JobPost from './[id]/JobPost.svelte';
 	import Error from '../+error.svelte';
 
-	let jobDetails = [
+	let jobDetails_dummy = [
 		{
 			id: 1,
 			title: 'WordPress Website',
@@ -42,19 +42,23 @@
 		}
 	];
 
-	// let jobDetails = [];
+	let jobDetails = [];
 
-	// onMount(async () => {
-	// 	try {
-	// 		let res = await fetch('');
-	// 		if (!res.ok) {
-	// 			console.log('Error in fetching jobs', res);
-	// 		}
-	// 		jobDetails = await res.json();
-	// 	} catch (error) {
-	// 		console.log('Error in fetching jobs', error);
-	// 	}
-	// });
+	onMount(async () => {
+		try {
+			let res = await fetch('http://localhost:8080/api/jobs',
+			{
+				"method": "GET",
+				"credentials":"include"
+			});
+			if (!res.ok) {
+				console.log('Error in fetching jobs', res);
+			}
+			jobDetails = await res.json();
+		} catch (error) {
+			console.log('Error in fetching jobs', error);
+		}
+	});
 </script>
 
 <div class="jobs-container">

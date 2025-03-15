@@ -1,10 +1,12 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { page } from '$app/stores';
+	// import { page } from '$app/stores';
+    import { page } from '$app/state';
+    import { goto } from '$app/navigation';
 
 	// id from url
-	let id: number;
-	$: id = parseInt($page.params.id);
+	let id: number = parseInt(page.params.id)
+	// $: id = parseInt($page.params.id);
 
 	let jobDetails = {
 		// title: '',
@@ -17,23 +19,26 @@
 		title: 'Web Developer',
 		description: 'Develop a front-end React app for a startup.',
 		budget: 2000,
-		recruiter: 'Anjali Gupta',
+		recruiter_id: 'Anjali Gupta',
 		deadline: new Date(2025, 5, 25),
 		bidding: ['Sandeep', 'Neha']
 	};
 
-	// onMount(async () => {
-	// 	try {
-	// 		const response = await fetch(`http://jobs/${id}`);
-	// 		if (!response.ok) {
-	// 			throw new Error('Failed to fetch job details');
-	// 		}
-	// 		jobDetails = await response.json();
-	// 	} catch (error) {
-	// 		console.error('Error fetching job details:', error);
-	// 		goto('/JobPost');
-	// 	}
-	// });
+	onMount(async () => {
+		try {
+			const response = await fetch(`http://localhost:8080/api/jobs/${id}`, {
+                "method": "GET",
+                "credentials": "include",
+            });
+			if (!response.ok) {
+				throw new Error('Failed to fetch job details');
+			}
+			jobDetails = await response.json();
+		} catch (error) {
+			console.error('Error fetching job details:', error);
+			goto('/jobs');
+		}
+	});
 
 	function handleBid() {
 		alert(`You have placed a bid on the job: ${jobDetails.title}`);
@@ -47,7 +52,7 @@
 		<p>{jobDetails.description}</p>
 	{/if}
 
-	<p><strong>Posted by:</strong> {jobDetails.recruiter}</p>
+	<p><strong>Posted by:</strong> {jobDetails.recruiter_id}</p>
 
 	{#if jobDetails.deadline}
 		<p><strong>Deadline:</strong> {jobDetails.deadline.toLocaleDateString()}</p>
@@ -57,9 +62,9 @@
 		<p><strong>Budget:</strong> ₹{jobDetails.budget}</p>
 	{/if}
 
-	{#if jobDetails.bidding.length > 0}
+	<!-- {#if jobDetails.bidding.length > 0}
 		<p><strong>Bidders:</strong> {jobDetails.bidding.join(', ')}</p>
-	{/if}
+	{/if} -->
 	<button class="bid-button" on:click={handleBid}>Place Bid</button>
 </div>
 

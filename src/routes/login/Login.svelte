@@ -21,7 +21,7 @@
 				console.log('data: \n', res.data);
 				sessionStorage.setItem('email', email);
 				sessionStorage.setItem('password', password);
-				goto('/options')
+				goto('/jobs')
 			} else {
 				console.log('status-code: ', res.status);
 				console.log('data\n', res.data);
