@@ -40,6 +40,8 @@
 
 <style>
 	.home-page {
+		background-image: radial-gradient(rgba(0, 0, 0, 0.08) 1px, transparent 1px);
+		background-size: 15px 15px;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
@@ -204,7 +206,7 @@
 		position: absolute;
 		font-size: 2rem;
 		color: #ddd;
-		opacity: 0.8;
+		opacity: 0.5;
 	}
 
 	.lightbulb {

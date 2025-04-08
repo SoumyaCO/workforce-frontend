@@ -13,15 +13,19 @@
 	async function onclick() {
 		// POST request to backend, '/login' route
 		try {
-			let res = await axios.post(`http://localhost:8080/login`, {
-				email: email,
-				password: password
-			}, {withCredentials: true});
+			let res = await axios.post(
+				`http://localhost:8080/login`,
+				{
+					email: email,
+					password: password
+				},
+				{ withCredentials: true }
+			);
 			if (res.status == 200) {
 				console.log('data: \n', res.data);
 				sessionStorage.setItem('email', email);
 				sessionStorage.setItem('password', password);
-				goto('/jobs')
+				goto('/jobs');
 			} else {
 				console.log('status-code: ', res.status);
 				console.log('data\n', res.data);

@@ -3,5 +3,8 @@
 	let { children } = $props();
 	import Navbar from './Navbar.svelte';
 </script>
-<Navbar loggedIn={ true } accountType="recruiter"/>
+
+<Navbar />
+
+<!-- <Navbar loggedIn={true} accountType="recruiter" /> -->
 {@render children()}

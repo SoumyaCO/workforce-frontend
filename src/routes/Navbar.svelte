@@ -1,7 +1,6 @@
 <script lang="ts">
 	import Icon from '@iconify/svelte';
 
-	// By default, the user is not logged in
 	let accountInfo: { loggedIn: Boolean; accountType: 'recruiter' | 'employee' } = {
 		loggedIn: true,
 		accountType: 'recruiter'
@@ -25,7 +24,7 @@
 		<a href="/"><img src="logo-wg.png" alt="Logo" class="logo" /></a>
 	</div>
 
-	<!-- Hamburger Menu -->
+	<!-- Hamburger menu -->
 	<button class="hamburger" on:click={toggleHamburgerMenu} aria-label="Toggle Menu">
 		<Icon icon="ci:hamburger" {width} {height} style={iconStyle} />
 	</button>
@@ -110,6 +109,8 @@
 		align-items: center;
 		padding: 1rem 2rem;
 		background-color: #f7f7f7;
+		background-image: radial-gradient(rgba(0, 0, 0, 0.08) 1px, transparent 1px);
+		background-size: 15px 15px;
 		position: relative;
 	}
 
