@@ -1,11 +1,11 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { page } from '$app/stores';
-	import { goto } from '$app/navigation';
+	import { page } from '$app/state';
+	import FloatingAlert from '$lib/components/ui/FloatingAlert.svelte';
+	import { BiddingAlertData } from '$lib/states/alerts.svelte';
 
 	// id from url
-	let id: number;
-	$: id = parseInt($page.params.id);
+	let id: string = page.params.id;
 
 	// Dummy job details for testing
 	let jobDetails = {
@@ -23,8 +23,18 @@ Requirements:
 		skills: ['React', 'TypeScript', 'CSS', 'Redux', 'GraphQL']
 	};
 
+	// bidders interface
+	interface bidInfo {
+		id: number; // prob. be a string after
+		name: string;
+		avatar?: string | null;
+		bidAmount: number;
+		rating?: number | null;
+		comment?: string | undefined;
+	}
+
 	// Dummy bidders data
-	let bidders = [
+	let bidders: bidInfo[] = [
 		{
 			id: 1,
 			name: 'Alex Johnson',
@@ -64,8 +74,10 @@ Requirements:
 	function submitBid() {
 		if (!bidAmount) return;
 
+		BiddingAlertData.showAlert = true;
+
 		// adding new bid to the list
-		const newBid = {
+		const newBid: bidInfo = {
 			id: bidders.length + 1,
 			name: 'You',
 			avatar: 'YO',
@@ -75,11 +87,13 @@ Requirements:
 		};
 
 		bidders = [...bidders, newBid];
-		showBidForm = false;
-		bidAmount = '';
-		bidComment = '';
+		// bidAmount = '';
+		// bidComment = '';
 
-		alert(`Your bid of ₹${newBid.bidAmount.toLocaleString()} has been submitted!`);
+		bidders = [...bidders, newBid];
+		showBidForm = false;
+
+		// alert(`Your bid of ₹${newBid.bidAmount.toLocaleString()} has been submitted!`);
 	}
 
 	// job details from backend
@@ -113,6 +127,9 @@ Requirements:
 	}
 </script>
 
+{#if BiddingAlertData.showAlert === true}
+	<FloatingAlert amount={bidAmount} comment={bidComment} />
+{/if}
 <div class="container">
 	{#if loading}
 		<div class="loading-spinner"></div>
